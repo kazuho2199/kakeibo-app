@@ -1,0 +1,80 @@
+.app {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 16px 64px;
+}
+
+.app h1 {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.uploader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.upload-button {
+  cursor: pointer;
+  padding: 12px 24px;
+  background: #36a2eb;
+  color: #fff;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.error-message {
+  color: #d9534f;
+  margin-top: 8px;
+}
+
+.charts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+.chart-card {
+  flex: 1 1 320px;
+  max-width: 400px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.chart-card h2 {
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.empty-message {
+  text-align: center;
+  color: #666;
+}
+
+.receipt-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.receipt-table th,
+.receipt-table td {
+  border-bottom: 1px solid #ddd;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.remove-button {
+  cursor: pointer;
+  color: #d9534f;
+  background: none;
+  border: 1px solid #d9534f;
+  border-radius: 4px;
+  padding: 4px 8px;
+}
