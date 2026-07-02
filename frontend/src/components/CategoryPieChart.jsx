@@ -2,6 +2,7 @@ import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { CATEGORIES, CATEGORY_COLORS } from '../constants/categories';
+import { formatYen } from '../utils/formatCurrency';
 
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
@@ -31,7 +32,7 @@ export default function CategoryPieChart({ receipts }) {
         color: '#fff',
         font: { weight: 'bold' },
         formatter: (value, context) =>
-          `${context.chart.data.labels[context.dataIndex]}\n¥${value.toLocaleString()}`,
+          `${context.chart.data.labels[context.dataIndex]}\n${formatYen(value)}`,
       },
     },
   };

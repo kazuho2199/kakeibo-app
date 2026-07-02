@@ -7,8 +7,10 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { formatYen } from '../utils/formatCurrency';
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend, ChartDataLabels);
 
 // 月別の支出合計を棒グラフで表示するコンポーネント
 export default function MonthlyBarChart({ receipts }) {
@@ -33,10 +35,31 @@ export default function MonthlyBarChart({ receipts }) {
     ],
   };
 
+  const options = {
+    scales: {
+      y: {
+        ticks: {
+          callback: (value) => formatYen(value),
+        },
+      },
+    },
+    plugins: {
+      datalabels: {
+        // 金額が0円の月はラベルを表示しない
+        display: (context) => context.dataset.data[context.dataIndex] > 0,
+        anchor: 'end',
+        align: 'top',
+        color: '#333',
+        font: { weight: 'bold' },
+        formatter: (value) => formatYen(value),
+      },
+    },
+  };
+
   return (
     <div className="chart-card">
       <h2>月別支出</h2>
-      <Bar data={data} />
+      <Bar data={data} options={options} />
     </div>
   );
 }
