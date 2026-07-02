@@ -7,6 +7,7 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 export default function ReceiptUploader({ onAnalyzed }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [warnings, setWarnings] = useState([]);
 
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
@@ -14,6 +15,7 @@ export default function ReceiptUploader({ onAnalyzed }) {
 
     setLoading(true);
     setError('');
+    setWarnings([]);
 
     try {
       const { base64, mediaType } = await fileToBase64(file);
@@ -29,7 +31,9 @@ export default function ReceiptUploader({ onAnalyzed }) {
       }
 
       const data = await response.json();
-      onAnalyzed(data);
+      // onAnalyzedはデータ検証で見つかった警告メッセージの配列を返す
+      const validationWarnings = onAnalyzed(data);
+      setWarnings(validationWarnings || []);
     } catch (err) {
       console.error(err);
       setError('レシートの読み取りに失敗しました。画像を確認して再度お試しください。');
@@ -53,6 +57,11 @@ export default function ReceiptUploader({ onAnalyzed }) {
         />
       </label>
       {error && <p className="error-message">{error}</p>}
+      {warnings.map((warning) => (
+        <p key={warning} className="warning-message">
+          警告: {warning}
+        </p>
+      ))}
     </div>
   );
 }

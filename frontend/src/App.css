@@ -30,6 +30,15 @@
   margin-top: 8px;
 }
 
+.warning-message {
+  color: #8a6d00;
+  background: #fff3cd;
+  border: 1px solid #ffe08a;
+  border-radius: 4px;
+  padding: 6px 12px;
+  margin-top: 8px;
+}
+
 .charts {
   display: flex;
   flex-wrap: wrap;
